@@ -5,7 +5,7 @@
 - Disk usage  : 25GB
 
 ## Proxy
-- Bazel build infrastructure is implemented for Tensorflow framework. Unfiortunatelly, the Socks5 proxy protocol available on Hunter is not supported. A specific setup is required to build tensorflow on the target compute node of Hunter. This is based on squid to setup the required proxy.
+- Bazel build infrastructure is implemented for Tensorflow framework. Unfortunatelly, the Socks5 proxy protocol available on Hunter is not supported. A specific setup is required to build tensorflow on the target compute node of Hunter. This is based on squid to setup the required proxy.
 
 
 
