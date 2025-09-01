@@ -13,7 +13,7 @@
 
 Submit a job to get a node (using local scratch in this exemple):
 ``` bash
-qsub -I -select=1:nodetype=mi300a:node_type_storage=localscratch -l walltime=05:00:00
+qsub -I -select=1:nodetype=mi300a:node_type_storage=localscratch -l walltime=02:00:00
 ```
 Environment variables:
 
