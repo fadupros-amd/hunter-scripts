@@ -1,4 +1,4 @@
-# Build TENSORFLOW (v2.18)
+# Build ROCm (v6.2.1)
 ## Prerequisites / Target
 - Cray-Python v3.11.7
 - ROCm 6.2.2
