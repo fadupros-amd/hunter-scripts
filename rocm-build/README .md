@@ -2,8 +2,10 @@
 ## Prerequisites / Target
 - RHEL 9.4
 - Disk usage  : 50GB
-- Proxy neds to be set on the compute node (standard SOCKS5) : https://kb.hlrs.de/platforms/index.php/SSH_Tunnel_with_Proxy
-- The procedure reuse the runfile installer mechanism : https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html#rocm-runfile-installer
+- Proxy neds to be set on the compute node (standard SOCKS5)
+  -  https://kb.hlrs.de/platforms/index.php/SSH_Tunnel_with_Proxy
+- The procedure reuse the runfile installer mechanism
+  -  https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/rocm-runfile-installer.html#rocm-runfile-installer
   
 - Adjust the  Target Directory in the script
 
