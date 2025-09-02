@@ -11,20 +11,22 @@
 
 ### On Hunter login node
 
-Submit a job to get a node (using local scratch in this exemple):
+Submit a job to obtain a compute  node (this example uses local scratch storage):
 ``` bash
 qsub -I -select=1:nodetype=mi300a:node_type_storage=localscratch -l walltime=02:00:00
 ```
-Environment variables (for illustration, collected after submission of the job and reused on the localhost):
+After the job submitted, collect the following information :  
+- PBS Job ID  ($pbsid_computenode)
+- hostname ($hostname_computenode) 
+This information will be reused later on the localhost.
+The variable names (pbsid_computenode and hostname_computenode) are shown for illustration in the following scripts :  
 
--   `$pbs_computenode`
--   `$name_computenode`
 
 ------------------------------------------------------------------------
 
 ### On localhost (setup provided for Ubuntu OS) 
 
-Install and configure **squid**:
+Install and configure **Squid**:
 
 ``` bash
 sudo apt-get install -y squid
@@ -43,7 +45,7 @@ curl -I -x http://127.0.0.1:3128 https://www.google.com
 #### Export Job ID
 
 ``` bash
-export PBS_JOBID=$pbs_computenode
+export PBS_JOBID=${pbsid_computenode}
 ```
 
 ------------------------------------------------------------------------
@@ -65,7 +67,7 @@ Host hunter
   ProxyJump aac7
 
 Host compute
-  HostName $name_computenode.hsn.hunter.hww.hlrs.de
+  HostName ${hostname_computenode}.hsn.hunter.hww.hlrs.de
   User userhunter
   ProxyJump aac7,hunter
 ```
