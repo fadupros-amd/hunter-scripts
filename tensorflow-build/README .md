@@ -1,15 +1,15 @@
 # Build TENSORFLOW (v2.18)
 ## Prerequisites / Target
 - Cray-Python v3.11.7
-- ROCm 6.2.2
+- ROCm 6.2.2 (default on Hunter)
 - Disk usage  : 25GB
 
-## Proxy
-- Bazel build infrastructure is implemented for Tensorflow framework. Unfortunatelly, the Socks5 proxy protocol available on Hunter is not supported. A specific setup is required to build tensorflow on the target compute node of Hunter. This is based on squid to setup the required proxy.
+## http Proxy for Bazel
+- Tensorflow uses the Bazel build and test infrastructure. However, the Socks5 proxy protocol available on Hunter is not supported. Therefore, a special configuration using Squid is required to build Tensorflow on the Hunter Compute node and establish the necessary proxy.
 
 
 
-### Hunter - Login Node
+### On Hunter login node
 
 Submit a job to get a node (using local scratch in this exemple):
 ``` bash
@@ -22,7 +22,7 @@ Environment variables (for illustration, collected after submission of the job a
 
 ------------------------------------------------------------------------
 
-### Localhost (setup for Ubuntu) 
+### On localhost (setup provided for Ubuntu OS) 
 
 Install and configure **squid**:
 
@@ -84,14 +84,18 @@ ssh -J aac7,hunter -o SendEnv=PBS_JOBID -R 12345:127.0.0.1:3128 compute
 
 ------------------------------------------------------------------------
 
-### Hunter - Compute Node
+### On Hunter compute node
 
-Run the Tensorflow build script in the target directory:
+Run the Tensorflow build script :
+-  Update the proxy configuration  and set the correct target directory in the script.
+-  The missing patchelf utility is installed during the this process : https://github.com/NixOS/patchelf.
+-  A small modification of tensorflow `pip/build_pip_package.py` file is also applied as a workaround to support the patchelf installation.
+
 
 ``` bash
 ./build_tensorflow_218_hunter.sh
 ```
-
+- The build process takes approximatively 20 minutes and should end with the message " Build completed successfully, 22659 total actions"
 
 
 
