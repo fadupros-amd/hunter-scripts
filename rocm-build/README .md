@@ -19,7 +19,7 @@ qsub -I -select=1:nodetype=mi300a:node_type_storage=localscratch -l walltime=02:
 ## Hunter - Compute Node
 
 - Target Directory should be adapted in this script.
-- Run the ROCm build script in the target directory:
+- Run the ROCm build script :
 
 ``` bash
 ./build_rocm641_hunter.sh download install
