@@ -12,7 +12,7 @@
 #####################
 
 #	Input Variables
-export DIR_CACHE="/localscratch/86111.hunter-pbs01/tensorflow-upstream"
+export BUILD_DIR="/localscratch/89880.hunter-pbs01/tensorflow-build"
 export PROXY_HOST="127.0.0.1"
 export PROXY_PORT="12345"
 
@@ -39,6 +39,7 @@ git config --global --unset-all https.proxy
 git config --global  http.proxy "$PROXY"
 git config --global  https.proxy "$PROXY"
 
+export DIR_CACHE=${BUILD_DIR}/tensorflow-upstream
 export PATH=$PATH:${DIR_CACHE}:${DIR_CACHE}/tools/hostbin
 
 
@@ -84,4 +85,4 @@ yes "" | TF_NEED_CLANG=1 CLANG_COMPILER_PATH=${ROCM_PATH}/llvm/bin/clang ROCM_PA
 
 
 ####  Build
-bazel  --output_base=${DIR_CACHE}/repo_workdir_bazel_download build  --repository_cache=${DIR_CACHE}/fetched --repo_env=${PROXY}" --action_env=http_proxy --action_env=https_proxy    --action_env=PATH=${DIR_CACHE}/tools/hostbin:$PATH  --config=opt --config=rocm   --repo_env=WHEEL_NAME=tensorflow_rocm --action_env=project_name=tensorflow_rocm/ //tensorflow/tools/pip_package:wheel  --verbose_failures --repo_env=CC=${ROCM_PATH}/llvm/bin/clang --repo_env=BAZEL_COMPILER=${ROCM_PATH}/llvm/bin/clang --repo_env=CLANG_COMPILER_PATH=${ROCM_PATH}/llvm/bin/clang 
+bazel  --output_base=${DIR_CACHE}/repo_workdir_bazel_download build  --repository_cache=${DIR_CACHE}/fetched --repo_env=${PROXY} --action_env=http_proxy --action_env=https_proxy    --action_env=PATH=${DIR_CACHE}/tools/hostbin:$PATH  --config=opt --config=rocm   --repo_env=WHEEL_NAME=tensorflow_rocm --action_env=project_name=tensorflow_rocm/ //tensorflow/tools/pip_package:wheel  --verbose_failures --repo_env=CC=${ROCM_PATH}/llvm/bin/clang --repo_env=BAZEL_COMPILER=${ROCM_PATH}/llvm/bin/clang --repo_env=CLANG_COMPILER_PATH=${ROCM_PATH}/llvm/bin/clang 
