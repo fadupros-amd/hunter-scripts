@@ -7,14 +7,32 @@
 # Further validation needed (e.g., version file ...)
 ########################################
 
-set -euo pipefail
+#set -euo pipefail
 
 # === Configuration ===
 ROCM_TARGET_VERSION="6.4.1"
-ROCM_TARGET_DIR="/localscratch/86111.hunter-pbs01/rocm"
+ROCM_TARGET_DIR="${PWD}/rocm"
 ROCM_RUNFILE="rocm-installer_1.1.1.60401-30-83~el9.run"
 ROCM_URL="https://repo.radeon.com/rocm/installer/rocm-runfile-installer/rocm-rel-${ROCM_TARGET_VERSION}/el9/${ROCM_RUNFILE}"
 LOGFILE="${ROCM_TARGET_DIR}/install.log"
+
+export PROXY_HOST="127.0.0.1"
+export PROXY_PORT="12345"
+
+export PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
+
+export ALL_PROXY="$PROXY"
+export HTTP_PROXY="$PROXY"
+export HTTPS_PROXY="$PROXY"
+export http_proxy="$PROXY"
+export https_proxy="$PROXY"
+
+git config --global --unset-all http.proxy
+git config --global --unset-all https.proxy
+git config --global  http.proxy "$PROXY"
+git config --global  https.proxy "$PROXY"
+
+
 
 # === Logging Functions ===
 log() {
